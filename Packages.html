@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Safari & City Tours travel packages, durations and prices.">
+  <title>Tour Packages | Safari &amp; City Tours</title>
+
+  <style>
+    :root {
+      --green: #064e3b;
+      --green-dark: #033b2d;
+      --green-light: #eaf7ee;
+      --yellow: #facc15;
+      --text: #18332b;
+      --muted: #64736d;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: #f7faf8;
+      line-height: 1.6;
+    }
+
+    /* Keep this navigation identical on every website page. */
+    .navbar {
+      min-height: 78px;
+      padding: 14px 7%;
+      background: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    }
+    .logo {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--yellow); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      list-style: none;
+    }
+    .nav-links a {
+      display: block;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--yellow);
+      color: var(--green-dark);
+    }
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 270px;
+      padding: 65px 7%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(0, 45, 34, .55), rgba(0, 45, 34, .62)),
+        url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1800&q=85") center 48%/cover;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero p { font-size: clamp(1rem, 2vw, 1.2rem); max-width: 720px; }
+
+    .section {
+      width: min(1150px, 90%);
+      margin: 48px auto;
+    }
+    .section-heading { text-align: center; margin-bottom: 28px; }
+    .section-heading h2 {
+      color: var(--green);
+      font-size: clamp(1.7rem, 3vw, 2.25rem);
+    }
+    .section-heading p { color: var(--muted); margin-top: 6px; }
+
+    .package-intro {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .intro-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(20,55,40,.07);
+      border-top: 4px solid var(--yellow);
+    }
+    .intro-card h3 { color: var(--green); margin-bottom: 6px; }
+    .intro-card p { color: var(--muted); font-size: .92rem; }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 5px 20px rgba(20,55,40,.09);
+    }
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    thead { background: var(--green); color: white; }
+    th, td { padding: 17px 16px; }
+    th { font-size: .93rem; letter-spacing: .2px; }
+    tbody tr { border-bottom: 1px solid #e8eee9; }
+    tbody tr:last-child { border-bottom: 0; }
+    tbody tr:hover { background: #f3faf5; }
+    td { color: #40534b; font-size: .93rem; }
+    td:first-child { color: var(--green-dark); font-weight: 700; }
+    .price { color: var(--green); font-weight: 800; white-space: nowrap; }
+    .package-type {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green);
+      padding: 4px 9px;
+      border-radius: 20px;
+      font-size: .76rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .book-link {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--green-dark);
+      text-decoration: none;
+      font-weight: 800;
+      padding: 8px 13px;
+      border-radius: 7px;
+      white-space: nowrap;
+      transition: background .2s ease;
+    }
+    .book-link:hover { background: #f3b900; }
+
+    .note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--yellow);
+      background: #fffbea;
+      color: #66551b;
+      border-radius: 7px;
+      font-size: .9rem;
+    }
+
+    .callout {
+      width: min(1150px, 90%);
+      margin: 55px auto;
+      padding: 34px 28px;
+      border-radius: 18px;
+      background: linear-gradient(110deg, #e4f5d8, #f4fbe9);
+      text-align: center;
+    }
+    .callout h2 { color: var(--green-dark); font-size: clamp(1.5rem, 3vw, 2.1rem); }
+    .callout p { color: var(--muted); margin: 8px 0 18px; }
+    .btn {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 12px 23px;
+      border-radius: 8px;
+      transition: background .2s ease;
+    }
+    .btn:hover { background: #08734f; }
+
+    footer {
+      background: var(--green-dark);
+      color: #e8f4ed;
+      text-align: center;
+      padding: 24px 7%;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 850px) {
+      .package-intro { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .navbar { padding: 14px 5%; }
+      .logo { font-size: 1.05rem; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 12px 5% 18px;
+        background: var(--green-dark);
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { text-align: center; }
+      .hero { min-height: 230px; padding: 52px 6%; }
+      .section { margin: 35px auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Use the same navbar on index.html, Destination.html, Packages.html and contact.html. -->
+  <header class="navbar">
+    <a class="logo" href="index.html">SAFARI &amp; CITY <span>TOURS</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu"
+            aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Destination.html">Destinations</a></li>
+        <li><a class="active" href="Packages.html" aria-current="page">Packages</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Our Tour Packages</h1>
+        <p>Choose an experience that suits your time, interests and budget. Explore Uganda with confidence.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <h2>Find the Right Travel Package</h2>
+        <p>From short city visits to unforgettable wildlife adventures, there is a trip for everyone.</p>
+      </div>
+
+      <div class="package-intro">
+        <article class="intro-card">
+          <h3>City Experiences</h3>
+          <p>Discover Kampala, local culture, history, shopping and delicious Ugandan food.</p>
+        </article>
+        <article class="intro-card">
+          <h3>Wildlife Adventures</h3>
+          <p>Explore Uganda's national parks, wildlife, scenic landscapes and nature.</p>
+        </article>
+        <article class="intro-card">
+          <h3>Relaxing Getaways</h3>
+          <p>Enjoy peaceful lakeside escapes, island visits and refreshing day trips.</p>
+        </article>
+      </div>
+
+      <div class="section-heading">
+        <h2>Available Travel Packages</h2>
+        <p>Review the sample packages, duration and estimated prices below.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Package</th>
+              <th scope="col">Destination / Experience</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Package Type</th>
+              <th scope="col">Price (UGX)</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kampala City Discovery</td>
+              <td>Kampala city tour</td>
+              <td>1 Day</td>
+              <td><span class="package-type">City Tour</span></td>
+              <td class="price">150,000</td>
+              <td><a class="book-link" href="contact.html">Book Now</a></td>
+            </tr>
+            <tr>
+              <td>Entebbe Lakeside Escape</td>
+              <td>Entebbe and Lake Victoria</td>
+              <td>1 Day</td>
+              <td><span class="package-type">Relaxation</span></td>
+              <td class="price">180,000</td>
+              <td><a class="book-link" href="contact.html">Book Now</a></td>
+            </tr>
+            <tr>
+              <td>Murchison Falls Adventure</td>
+              <td>Murchison Falls National Park</td>
+              <td>3 Days / 2 Nights</td>
+              <td><span class="package-type">Wildlife</span></td>
+              <td class="price">950,000</td>
+              <td><a class="book-link" href="contact.html">Book Now</a></td>
+            </tr>
+            <tr>
+              <td>Queen Elizabeth Safari</td>
+              <td>Queen Elizabeth National Park</td>
+              <td>3 Days / 2 Nights</td>
+              <td><span class="package-type">Wildlife</span></td>
+              <td class="price">1,100,000</td>
+              <td><a class="book-link" href="contact.html">Book Now</a></td>
+            </tr>
+            <tr>
+              <td>Bwindi Gorilla Experience</td>
+              <td>Bwindi Impenetrable National Park</td>
+              <td>3 Days / 2 Nights</td>
+              <td><span class="package-type">Adventure</span></td>
+              <td class="price">2,800,000</td>
+              <td><a class="book-link" href="contact.html">Book Now</a></td>
+            </tr>
+            <tr>
+              <td>Rwenzori Mountain Journey</td>
+              <td>Rwenzori Mountains</td>
+              <td>5 Days / 4 Nights</td>
+              <td><span class="package-type">Hiking</span></td>
+              <td class="price">1,750,000</td>
+              <td><a class="book-link" href="contact.html">Book Now</a></td>
+            </tr>
+            <tr>
+              <td>Lake Victoria Island Tour</td>
+              <td>Lake Victoria islands</td>
+              <td>2 Days / 1 Night</td>
+              <td><span class="package-type">Getaway</span></td>
+              <td class="price">420,000</td>
+              <td><a class="book-link" href="contact.html">Book Now</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="note">
+        <strong>Price note:</strong> Prices shown are illustrative sample rates for this website project, not verified live quotations. Actual costs may change depending on group size, transport, accommodation, park fees, permits and travel dates. Contact us for a confirmed quotation.
+      </p>
+    </section>
+
+    <section class="callout">
+      <h2>Ready for Your Next Adventure?</h2>
+      <p>Tell us where you would like to go and we will help you plan your journey.</p>
+      <a class="btn" href="contact.html">Contact Us to Book</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Safari &amp; City Tours. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile navigation menu
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+    });
+
+    // Automatically display the current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

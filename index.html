@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="description" content="SAFARI AND CITYTOURS - Discover Uganda through safaris, city tours
+ and travel experiences.">
+ <title>SAFARI AND CITYTOURS | Home</title>
+ <style>
+ /* GENERAL STYLING */
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+ html { scroll-behavior: smooth; }
+ :root {
+ --green: #087F5B;
+ --yellow: #FFC857;
+ --blue: #38BDF8;
+ --orange: #F97316;
+ --cream: #FFF8E7;
+ --white: #FFFFFF;
+ --dark: #18352B;
+ --text: #52645A;
+ }
+ body {
+ font-family: Arial, sans-serif;
+ background: var(--cream);
+ color: var(--dark);
+ line-height: 1.7;
+ }
+ /* TOP HEADER AND NAVIGATION */
+ header {
+ background:rgb(6, 99, 10);
+ padding: 16px 7%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ position: sticky;
+ top: 0;
+ z-index: 1000;
+ box-shadow: 0 3px 12px #00000020;
+ }
+ .logo {
+ color: var(--yellow);
+ font-size: 21px;
+ font-weight: bold;
+ line-height: 1.3;
+ }
+ .logo span {
+ display: block;
+ color: white;
+ font-size: 10px;
+ letter-spacing: 2px;
+ }
+ nav { display: flex; gap: 25px; align-items: center; }
+ nav a {
+ color: white;
+ text-decoration: none;
+ font-size: 14px;
+ font-weight: bold;
+ transition: 0.3s;
+ }
+ nav a:hover, nav a.active { color: var(--yellow); }
+ .menu-btn {
+ display: none;
+ background: none;
+ border: none;
+ color: white;
+ font-size: 28px;
+ cursor: pointer;
+ }
+ /* BUTTONS */
+ .btn {
+ display: inline-block;
+ background: var(--yellow);
+ color: var(--dark);
+ padding: 12px 25px;
+ border-radius: 25px;
+ text-decoration: none;
+ font-weight: bold;
+ transition: 0.3s;
+ }
+ .btn:hover {
+ background: var(--orange);
+ color: white;
+ transform: translateY(-3px);
+ }
+ /* WELCOME BANNER */
+ .hero {
+ min-height: 590px;
+ background:
+ linear-gradient(to right,rgb(6, 134, 6),rgb(132, 226, 132));
+ display: flex;
+ align-items: center;
+ padding: 70px 8%;
+ color: white;
+ }
+ .hero-content { max-width: 680px; }
+ .hero-tag {
+ color: var(--yellow);
+ font-weight: bold;
+ letter-spacing: 3px;
+ font-size: 14px;
+ }
+ .hero h1 {
+ font-size: clamp(40px, 6vw, 68px);
+ line-height: 1.15;
+ margin: 20px 0;
+ }
+ .hero h1 span { color: var(--yellow); }
+ .hero p { font-size: 17px; margin-bottom: 28px; }
+ .hero .btn { margin: 5px; }
+ .hero .secondary-btn {
+ background: transparent;
+ border: 2px solid white;
+ color: white;
+ }
+ 
+  /* IMAGE SLIDESHOW */
+  .slideshow-section { padding: 65px 8%; background: #fff; }
+  .slideshow { position: relative; max-width: 1120px; height: 430px; margin: 0 auto;
+    overflow: hidden; border-radius: 20px; box-shadow: 0 12px 30px #00000020; background: #18352B; }
+  .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease; }
+  .slide.active { opacity: 1; }
+  .slide img { width: 1120px; height: 430px; object-fit: cover; display: block; }
+  .slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.72), transparent 65%); }
+  .slide-caption { position: absolute; z-index: 2; left: 7%; bottom: 12%; color: white; max-width: 650px; }
+  .slide-caption h3 { font-size: clamp(24px, 4vw, 38px); margin-bottom: 7px; }
+  .slide-caption p { font-size: 16px; }
+  .slide-control { position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); border: 0;
+    border-radius: 50%; width: 44px; height: 44px; cursor: pointer; background: rgba(255,255,255,.9);
+    color: var(--dark); font-size: 24px; }
+  .slide-control:hover { background: var(--yellow); }
+  .slide-prev { left: 18px; } .slide-next { right: 18px; }
+  .slide-dots { position: absolute; z-index: 3; bottom: 22px; right: 7%; display: flex; gap: 9px; }
+  .slide-dot { width: 11px; height: 11px; border: 1px solid white; border-radius: 50%; padding: 0; background: transparent; cursor: pointer; }
+  .slide-dot.active { background: var(--yellow); border-color: var(--yellow); }
+  .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: center; }
+
+  /* GENERAL SECTIONS */
+ section { padding: 75px 8%; }
+ .section-heading {
+ text-align: center;
+ margin-bottom: 40px;
+ }
+ .section-heading h2 {
+ color: var(--green);
+ font-size: 32px;
+ }
+ .section-heading p { color: var(--text); margin-top: 8px; }
+ /* ABOUT THE AGENCY */
+ .images {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 45px;
+ align-items: center;
+ }
+ .intro img {
+ width: 100%;
+ height: 370px;
+ object-fit: cover;
+ border-radius: 18px;
+ }
+ .intro h2 {
+ font-size: 34px;
+ color: var(--green);
+ margin-bottom: 15px;
+ }
+ .intro p { color: var(--text); margin-bottom: 15px; }
+ /* FEATURED HIGHLIGHTS */
+ .highlights { background: #E5F7EE; }
+ .highlight-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 25px;
+ }
+ .highlight-card {
+ background: white;
+ padding: 30px 22px;
+ text-align: center;
+ border-radius: 15px;
+ border-bottom: 5px solid var(--yellow);
+ transition: 0.3s;
+ }
+ .highlight-card:hover { transform: translateY(-8px); }
+ .highlight-card .icon { font-size: 45px; margin-bottom: 12px; }
+ .highlight-card h3 { color: var(--green); margin-bottom: 10px; }
+ .highlight-card p { color: var(--text); font-size: 14px; }
+ /* TOURIST DESTINATIONS */
+ .destination-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 25px;
+ }
+ .destination-card {
+ background: white;
+ border-radius: 15px;
+ overflow: hidden;
+ box-shadow: 0 5px 18px #00000012;
+ transition: 0.3s;
+ }
+ .destination-card:hover { transform: translateY(-7px); }
+ .destination-card img {
+ width: 100%;
+ height: 220px;
+ object-fit: cover;
+ }
+ .destination-info { padding: 20px; }
+ .destination-info h3 { color: var(--green); margin-bottom: 8px; }
+ .destination-info p { color: var(--text); font-size: 14px; margin-bottom: 12px; }
+ .destination-info a { color: var(--orange); text-decoration: none; font-weight: bold; }
+ /* LOCAL DAY TOURS */
+ .day-tours { background: #EAF7FF; }
+ .tour-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 22px;
+ }
+ .tour-card {
+ background: white;
+ padding: 28px;
+ border-radius: 12px;
+ border-left: 5px solid var(--blue);
+ }
+ .tour-card h3 { color: var(--green); margin-bottom: 10px; }
+ .tour-card p { color: var(--text); }
+ /* TRAVEL PACKAGES */
+ .package-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 25px;
+ }
+
+ .package-card {
+ background: white;
+ padding: 30px 22px;
+ border-radius: 15px;
+ border: 1px solid #e4e9e4;
+ box-shadow: 0 5px 15px #0000000c;
+ }
+ .package-card h3 { color: var(--green); margin-bottom: 15px; }
+ .package-card ul { padding-left: 20px; color: var(--text); margin-bottom: 20px; }
+ .package-card li { margin-bottom: 8px; }
+ /* ONLINE PRESENCE */
+ .online {
+ background: var(--green);
+ color: white;
+ text-align: center;
+ }
+ .online h2 { color: var(--yellow); font-size: 32px; margin-bottom: 15px; }
+ .online p { max-width: 650px; margin: auto; }
+ .social-links {
+ display: flex;
+ justify-content: center;
+ flex-wrap: wrap;
+ gap: 15px;
+ margin-top: 25px;
+ }
+ .social-links a {
+ color: white;
+ text-decoration: none;
+ border: 1px solid white;
+ padding: 10px 22px;
+ border-radius: 25px;
+ transition: 0.3s;
+ }
+ .social-links a:hover {
+ background: var(--yellow);
+ color: var(--dark);
+ }
+ /* CONTACT SECTION */
+ .contact { text-align: center; }
+ .contact h2 { color: var(--green); font-size: 32px; margin-bottom: 12px; }
+ .contact p { color: var(--text); margin-bottom: 25px; }
+ /* FOOTER */
+ footer {
+ background: var(--dark);
+ color: white;
+ text-align: center;
+ padding: 25px;
+ font-size: 14px;
+ }
+ /* RESPONSIVE DESIGN */
+ @media (max-width: 850px) {
+ .menu-btn { display: block; }
+ nav {
+ display: none;
+ position: absolute;
+ top: 100%;
+ left: 0;
+ width: 100%;
+ background: var(--green);
+ flex-direction: column;
+ padding: 25px;
+ gap: 20px;
+ }
+ nav.active { display: flex; }
+ .intro { grid-template-columns: 1fr; }
+  .slideshow { height: 360px; }
+ .highlight-grid, .destination-grid,
+ .tour-grid, .package-grid {
+ grid-template-columns: repeat(2, 1fr);
+ }
+ }
+ @media (max-width: 550px) {
+ section { padding: 55px 6%; }
+ .highlight-grid, .destination-grid,
+ .tour-grid, .package-grid {
+ grid-template-columns: 1fr;
+ }
+ .hero { min-height: 500px; padding: 45px 6%; }
+  .slideshow-section { padding: 45px 6%; }
+  .slideshow { height: 300px; }
+  .slide-caption { left: 6%; bottom: 14%; right: 6%; }
+  .slide-caption p { font-size: 14px; }
+  .slide-control { width: 38px; height: 38px; font-size: 20px; }
+ .hero p { font-size: 15px; }
+ .logo { font-size: 17px; }
+ .logo span { font-size: 9px; }
+ }
+ </style>
+</head>
+
+<body>
+ <!-- TOP NAVIGATION -->
+ <header>
+ <div class="logo">
+ SAFARI &amp; CITYTOURS
+ <span>EXPLORE • DISCOVER • EXPERIENCE</span>
+ </div>
+ <button class="menu-btn" onclick="toggleMenu()" aria-label="Open navigation" aria-expanded="false">☰</button>
+ <nav id="navigation">
+ <a href="index.html" class="active">Home</a>
+ <a href="Destination.html">Destinations</a>
+ <a href="Packages.html">Packages</a>
+ <a href="contact.html">Contact Us</a>
+ </nav>
+ </header>
+ <main>
+ <!-- WELCOME BANNER -->
+ <section class="hero" id="home">
+ <div class="hero-content">
+ <p class="hero-tag">WELCOME TO SAFARI AND CITYTOURS</p>
+ <h1>Discover the Beauty of <span>Africa.</span></h1>
+ <p>
+ Explore breathtaking destinations, experience amazing
+ wildlife and discover the rich culture of Africa.
+ Your unforgettable journey begins here!
+ </p>
+ <a href="Destination.html" class="btn">Explore Destinations</a>
+ <a href="Packages.html" class="btn secondary-btn">View Packages</a>
+ </div>
+ </section>
+ <!-- AUTOMATIC IMAGE SLIDESHOW -->
+  <section class="slideshow-section" id="slideshow">
+    <div class="section-heading">
+      <h2>Experience the Beauty of Uganda</h2>
+      <p>Take a glimpse at the wildlife, landscapes and unforgettable adventures waiting for you.</p>
+    </div>
+    <div class="slideshow" aria-label="Uganda travel photo slideshow">
+      <div class="slide active">
+        <img src="zebras.jpg" alt="African wildlife safari">
+        <div class="slide-caption"><h3>Wildlife Safaris</h3><p>Discover Africa's remarkable wildlife in its natural home.</p></div>
+      </div>
+      <div class="slide">
+        <img src="sunshinePark.jpg" alt="African parks">
+        <div class="slide-caption"><h3>Beautiful Parks</h3><p>Explore breathtaking scenery and the natural beauty of Uganda.</p></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT THE AGENCY -->
+ <section class="intro" id="about">
+ <div class="images">
+ <img src="landscape.jpg"
+ alt="Beautiful African natural landscape">
+ <img src="anotherGorilla.jpg"
+ alt="Another beautiful African natural landscape">
+ </div>
+ <div>
+ <h2>Explore More. Experience More.</h2>
+ <p>
+ SAFARI AND CITYTOURS is a tourism and travel agency
+ dedicated to connecting travellers with the beauty,
+ culture and adventure of Africa.
+ </p>
+ <p>
+ We provide exciting wildlife safaris, local day tours,
+ cultural experiences and customised travel packages
+ designed to create unforgettable memories.
+ </p>
+ <p>
+ Whether you are visiting Uganda for the first time or
+ discovering its hidden treasures, we are ready to make
+ your journey special.
+ </p>
+ <a href="contact.html" class="btn">Learn More About Us</a>
+ </div>
+ </section>
+ <!-- FEATURED HIGHLIGHTS -->
+ <section class="highlights" id="highlights">
+ <div class="section-heading">
+ <h2>Our Featured Highlights</h2>
+ <p>Discover exciting experiences waiting for you.</p>
+ </div>
+ <div class="highlight-grid">
+ <div class="highlight-card">
+ <div class="icon"></div>
+ <h3>Wildlife Safaris</h3>
+ <p>Discover amazing African wildlife, national parks and natural habitats.</p>
+ </div>
+ <div class="highlight-card">
+ <div class="icon"></div>
+ <h3>City Experiences</h3>
+ <p>Explore vibrant cities, historical landmarks and cultural attractions.</p>
+ </div>
+ <div class="highlight-card">
+ <div class="icon"></div>
+ <h3>Adventure Travel</h3>
+ <p>Enjoy nature, exciting activities and unforgettable travel experiences.</p>
+ </div>
+ </div>
+ </section>
+ <!-- TOURIST DESTINATIONS -->
+ <section id="destinations">
+ <div class="section-heading">
+ <h2>Popular Tourist Destinations</h2>
+ <p>Discover the beauty of Uganda's amazing places.</p>
+ </div>
+ <div class="destination-grid">
+ <div class="destination-card">
+ <img src="zebras.jpg"
+ alt="African zebras">
+ <div class="destination-info">
+ <h3>ZEBRAS</h3>
+ <p>Discover magnificent wildlife ,zebras and breathtaking scenery.</p>
+ <a href="Destination.html">Explore More →</a>
+ </div>
+ </div>
+ <div class="destination-card">
+ <img src="sunshinePark.jpg"
+ alt="African wildlife">
+ <div class="destination-info">
+ <h3>Nice rest parks</h3>
+ <p>Enjoy wildlife viewing, nature and unforgettable safari adventures.</p>
+ <a href="Destination.html">Explore More →</a>
+ </div>
+ </div>
+ <div class="destination-card">
+ <img src="giraffe.jpg"
+ alt="tall giraffe">
+ <div class="destination-info">
+ <h3>Murchision Falls National Park</h3>
+ <p>Experience beautiful forest scenery and mountain gorilla trekking.</p>
+ <a href="Destination.html">Explore More →</a>
+ </div>
+ </div>
+ </div>
+ <div style="text-align:center; margin-top:35px;">
+ <a href="Destination.html" class="btn">View All Destinations</a>
+ </div>
+ </section>
+ <!-- LOCAL DAY TOURS -->
+ <section class="day-tours" id="tours">
+ <div class="section-heading">
+ <h2>Our Local Day Tours</h2>
+ <p>Short journeys. Amazing experiences.</p>
+ </div>
+ <div class="tour-grid">
+ <div class="tour-card">
+ <h3>Kampala City Tour</h3>
+ <p>Explore Kampala's historical landmarks, cultural attractions and vibrant city
+ life.</p>
+ </div>
+ <div class="tour-card">
+ <h3>Jinja Adventure Tour</h3>
+ <p>Discover the River Nile, enjoy boat rides and experience exciting adventures.</p>
+ </div>
+ <div class="tour-card">
+ <h3>Entebbe Excursion</h3>
+ <p>Visit botanical gardens, lakeside attractions and beautiful natural sites.</p>
+ </div>
+ </div>
+ </section>
+ <!-- TRAVEL PACKAGES -->
+ <section id="packages">
+ <div class="section-heading">
+ <h2>Explore Our Travel Packages</h2>
+ <p>Choose an experience that matches your adventure.</p>
+ </div>
+ <div class="package-grid">
+ <div class="package-card">
+ <h3>City Explorer</h3>
+ <ul>
+ <li>City sightseeing</li>
+ <li>Cultural experiences</li>
+ <li>Local attractions</li>
+ <li>Tour guidance</li>
+ </ul>
+ <a href="Packages.html" class="btn">View Package</a>
+ </div>
+ <div class="package-card">
+ <h3>Safari Adventure</h3>
+ <ul>
+ <li>National park exploration</li>
+ <li>Wildlife viewing</li>
+ <li>Nature experiences</li>
+ <li>Safari guidance</li>
+ </ul>
+ <a href="Packages.html" class="btn">View Package</a>
+ </div>
+ <div class="package-card">
+ <h3>Ultimate Uganda</h3>
+ <ul>
+ <li>Multiple destinations</li>
+ <li>Wildlife and culture</li>
+ <li>Adventure experiences</li>
+ <li>Customised itinerary</li>
+ </ul>
+ <a href="Packages.html" class="btn">View Package</a>
+ </div>
+ </div>
+ </section>
+ <!-- ONLINE PRESENCE -->
+ <section class="online">
+ <h2>Connect With Us Online</h2>
+ <p>
+ Follow our social media platforms for travel inspiration,
+ destination updates, beautiful experiences and exciting
+ tourism opportunities.
+ </p>
+ <div class="social-links">
+ <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+ <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+ <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+ <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
+ </div>
+ </section>
+ <!-- CONTACT AND BOOKING -->
+ <section class="contact" id="contact">
+ <h2>Ready for Your Next Adventure?</h2>
+ <p>
+ Let us help you discover new places, create memories
+ and enjoy unforgettable journeys.
+ </p>
+ <a href="contact.html" class="btn">Contact Our Team</a>
+ <a href="https://wa.me/256700000000"
+ target="_blank" rel="noopener"
+ class="btn"
+ style="background:#25D366; color:white;">
+ WhatsApp Us
+ </a>
+ </section>
+ </main>
+ <!-- FOOTER -->
+ <footer>
+ <h3>SAFARI AND CITYTOURS</h3>
+ <p>EXPLORE • DISCOVER • EXPERIENCE</p>
+ <p>
+ &copy; <span id="year"></span>
+ SAFARI AND CITYTOURS. All Rights Reserved.
+ </p>
+ </footer>
+ <!-- JAVASCRIPT -->
+ <script>
+ // Open or close the mobile navigation menu
+ function toggleMenu() {
+ document.getElementById("navigation")
+ .classList.toggle("active");
+ }
+  // Automatic slideshow: changes image every 4 seconds, without buttons
+  const slides = document.querySelectorAll(".slide");
+  let currentSlide = 0;
+
+  if (slides.length > 1) {
+    setInterval(() => {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }, 4000);
+  }
+
+  // Display the current year automatically
+ document.getElementById("year").textContent =
+ new Date().getFullYear();
+ </script>
+</body>
+</html>

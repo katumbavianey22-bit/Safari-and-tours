@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Safari & City Tours to ask questions and plan your next journey.">
+  <title>Contact Us | Safari &amp; City Tours</title>
+
+  <style>
+    :root {
+      --green: #064e3b;
+      --green-dark: #033b2d;
+      --green-light: #eaf7ee;
+      --yellow: #facc15;
+      --text: #18332b;
+      --muted: #64736d;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: #f7faf8;
+      line-height: 1.6;
+    }
+
+    /* Keep this navigation identical on every website page. */
+    .navbar {
+      min-height: 78px;
+      padding: 14px 7%;
+      background: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    }
+    .logo {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--yellow); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      list-style: none;
+    }
+    .nav-links a {
+      display: block;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--yellow);
+      color: var(--green-dark);
+    }
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 245px;
+      padding: 60px 7%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(0, 45, 34, .58), rgba(0, 45, 34, .65)),
+        url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1800&q=85") center 48%/cover;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero p { font-size: clamp(1rem, 2vw, 1.15rem); max-width: 700px; }
+
+    .section {
+      width: min(1100px, 90%);
+      margin: 48px auto;
+    }
+    .section-heading { text-align: center; margin-bottom: 28px; }
+    .section-heading h2 {
+      color: var(--green);
+      font-size: clamp(1.7rem, 3vw, 2.25rem);
+    }
+    .section-heading p { color: var(--muted); margin-top: 6px; }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .contact-form, .contact-card {
+      background: white;
+      padding: 28px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(20,55,40,.08);
+    }
+    .contact-form h3, .contact-card h3 {
+      color: var(--green-dark);
+      font-size: 1.35rem;
+      margin-bottom: 18px;
+    }
+    .form-group { margin-bottom: 17px; }
+    label {
+      display: block;
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid #cbd8d0;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(6,78,59,.12);
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    .submit-btn {
+      border: 0;
+      border-radius: 8px;
+      background: var(--green);
+      color: white;
+      padding: 13px 22px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+    .submit-btn:hover { background: #08734f; }
+    .form-message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: .92rem;
+    }
+    .form-message.show { display: block; }
+
+    .contact-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #e8eee9;
+    }
+    .contact-item:last-child { border-bottom: 0; }
+    .contact-item h4 { color: var(--green); margin-bottom: 4px; }
+    .contact-item p { color: var(--muted); }
+    .contact-item a {
+      color: #08734f;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .contact-item a:hover { text-decoration: underline; }
+    .location-note {
+      margin-top: 18px;
+      background: var(--green-light);
+      padding: 15px;
+      border-radius: 9px;
+      color: var(--green-dark);
+      font-size: .9rem;
+    }
+
+    .callout {
+      width: min(1100px, 90%);
+      margin: 55px auto;
+      padding: 32px 25px;
+      border-radius: 18px;
+      background: linear-gradient(110deg, #e4f5d8, #f4fbe9);
+      text-align: center;
+    }
+    .callout h2 { color: var(--green-dark); font-size: clamp(1.45rem, 3vw, 2rem); }
+    .callout p { color: var(--muted); margin-top: 8px; }
+
+    footer {
+      background: var(--green-dark);
+      color: #e8f4ed;
+      text-align: center;
+      padding: 24px 7%;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 800px) {
+      .contact-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .navbar { padding: 14px 5%; }
+      .logo { font-size: 1.05rem; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 12px 5% 18px;
+        background: var(--green-dark);
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { text-align: center; }
+      .hero { min-height: 220px; padding: 50px 6%; }
+      .section { margin: 35px auto; }
+      .contact-form, .contact-card { padding: 21px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Use the same navbar on index.html, Destination.html, Packages.html and contact.html. -->
+  <header class="navbar">
+    <a class="logo" href="index.html">SAFARI &amp; CITY <span>TOURS</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu"
+            aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Destination.html">Destinations</a></li>
+        <li><a href="Packages.html">Packages</a></li>
+        <li><a class="active" href="contact.html" aria-current="page">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Get in Touch</h1>
+        <p>Have a question or ready to plan your next adventure? Send us a message. We would love to hear from you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <h2>Contact Safari &amp; City Tours</h2>
+        <p>Complete the form or use our office information to reach our team.</p>
+      </div>
+
+      <div class="contact-layout">
+        <form class="contact-form" id="contactForm">
+          <h3>Send Us a Message</h3>
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="tour">Tour Choice</label>
+            <select id="tour" name="tour" required>
+              <option value="">Select a tour package</option>
+              <option>Kampala City Discovery</option>
+              <option>Entebbe Lakeside Escape</option>
+              <option>Murchison Falls Adventure</option>
+              <option>Queen Elizabeth Safari</option>
+              <option>Bwindi Gorilla Experience</option>
+              <option>Rwenzori Mountain Journey</option>
+              <option>Lake Victoria Island Tour</option>
+              <option>Other / Custom Tour</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your travel plans, preferred dates or questions..." required></textarea>
+          </div>
+
+          <button class="submit-btn" type="submit"
+          onclick="
+          alert"Thank you for contacting us">Send Message</button>
+          <p class="form-message" id="formMessage" role="status"></p>
+        </form>
+
+        <aside class="contact-card">
+          <h3>Our Office Details</h3>
+
+          <div class="contact-item">
+            <h4>Office Location</h4>
+            <p>Kampala, Uganda</p>
+          </div>
+
+          <div class="contact-item">
+            <h4>Office Hours</h4>
+            <p>Monday – Friday: 8:00 AM – 5:00 PM</p>
+            <p>Saturday: 9:00 AM – 1:00 PM</p>
+          </div>
+
+          <div class="contact-item">
+            <h4>Telephone</h4>
+            <p>Add your business contact.</p>
+          </div>
+
+          <div class="contact-item">
+            <h4>Email</h4>
+            <p>Add your official business email address here.</p>
+          </div>
+
+          <div class="location-note">
+            <strong>Visit us:</strong> Our office is listed in Kampala, Uganda. Next to HAM PLAZA
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="callout">
+      <h2>Your Journey Starts Here!</h2>
+      <p>Let Safari &amp; City Tours help you create memories worth keeping.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Safari &amp; City Tours. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile navigation menu
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+    });
+
+    // Front-end form validation and confirmation
+    const contactForm = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+
+      formMessage.textContent =
+        "Thank you for contacting Safari & City Tours. Your form is complete. To receive real messages, connect this form to an email service or website backend.";
+      formMessage.classList.add("show");
+      contactForm.reset();
+    });
+
+    // Automatically display the current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Uganda's national parks, cities, landmarks and beautiful beaches with Safari & City Tours.">
+  <title>Destinations | Safari & City Tours</title>
+
+  <style>
+    :root {
+      --green: #064e3b;
+      --green-dark: #033b2d;
+      --green-light: #eaf7ee;
+      --yellow: #facc15;
+      --text: #18332b;
+      --muted: #64736d;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: #f7faf8;
+      line-height: 1.6;
+    }
+
+    /* Keep this navigation identical on every website page. */
+    .navbar {
+      min-height: 78px;
+      padding: 14px 7%;
+      background: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    }
+    .logo {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--yellow); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      list-style: none;
+    }
+    .nav-links a {
+      display: block;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--yellow);
+      color: var(--green-dark);
+    }
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 270px;
+      padding: 70px 7%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(0, 45, 34, .48), rgba(0, 45, 34, .58)),
+        url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1800&q=85") center 48%/cover;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.7rem);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero p { font-size: clamp(1rem, 2vw, 1.2rem); max-width: 700px; }
+
+    .section {
+      width: min(1200px, 90%);
+      margin: 48px auto;
+    }
+    .section-heading { text-align: center; margin-bottom: 28px; }
+    .section-heading h2 { color: var(--green); font-size: clamp(1.7rem, 3vw, 2.3rem); }
+    .section-heading p { color: var(--muted); margin-top: 6px; }
+
+    .filter-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 28px;
+    }
+    .filter-btn {
+      border: 1px solid #c9ddd2;
+      background: white;
+      color: var(--green);
+      border-radius: 30px;
+      padding: 9px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    .destination-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .destination-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px rgba(20, 55, 40, .10);
+      transition: transform .25s ease, box-shadow .25s ease;
+    display: grid;
+grid-template-columns: 1fr;
+    }
+    .destination-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(20, 55, 40, .16);
+    }
+    .destination-card[hidden] { display: none; }
+    .destination-card img {
+      display: block;
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+    .card-content { padding: 17px 18px 20px;
+  grid-template-columns: 1fr; }
+    .category {
+      display: inline-block;
+      color: var(--green);
+      background: var(--green-light);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: .76rem;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    .card-content h3 { color: var(--green-dark); font-size: 1.12rem; margin-bottom: 7px; }
+    .card-content p { color: var(--muted); font-size: .93rem; min-height: 66px; }
+    .card-link {
+      display: inline-block;
+      margin-top: 12px;
+      color: #08734f;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .card-link:hover { text-decoration: underline; }
+
+   .slideshow{
+      padding:60px 8%;
+      text-align: center;
+      background:#E5FEE;
+    }
+    .slider{
+      max: width 1000px;
+      margin:auto;
+    }  
+   .slide img{
+    object-fit: cover;
+    transition: opacity 0.8s ease;
+   }
+    #slideCaption{
+      padding: 15px;
+      color: #18332b;
+    }
+    .callout {
+      width: min(1200px, 90%);
+      margin: 55px auto;
+      padding: 34px 28px;
+      border-radius: 18px;
+      background: linear-gradient(110deg, #e4f5d8, #f4fbe9);
+      text-align: center;
+    }
+    .callout h2 { color: var(--green-dark); font-size: clamp(1.5rem, 3vw, 2.2rem); }
+    .callout p { color: var(--muted); margin: 8px 0 18px; }
+    .btn {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 12px 23px;
+      border-radius: 8px;
+      transition: background .2s ease;
+    }
+    .btn:hover { background: #08734f; }
+
+    footer {
+      background: var(--green-dark);
+      color: #e8f4ed;
+      text-align: center;
+      padding: 24px 7%;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 1000px) {
+      .destination-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      .navbar { padding: 14px 5%; }
+      .logo { font-size: 1.05rem; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 12px 5% 18px;
+        background: var(--green-dark);
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { text-align: center; }
+      .hero { min-height: 230px; padding: 55px 6%; }
+      .section { margin: 35px auto; }
+    }
+    @media (max-width: 520px) {
+      .destination-grid { grid-template-columns: 1fr; }
+      .destination-card img { height: 215px; }
+      .card-content p { min-height: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Use the same navbar on index.html, Destination.html, Packages.html and contact.html. -->
+  <header class="navbar">
+    <a class="logo" href="index.html">SAFARI &amp; CITY <span>TOURS</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu"
+            aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="Destination.html" aria-current="page">Destinations</a></li>
+        <li><a href="Packages.html">Packages</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Explore Our Destinations</h1>
+        <p>Discover Uganda's remarkable wildlife, vibrant cities, cultural landmarks and relaxing lakeside escapes.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="gallery-title">
+      <div class="section-heading">
+        <h2 id="gallery-title">Find Your Next Adventure</h2>
+        <p>Explore memorable places and choose the experience that inspires you.</p>
+      </div>
+
+      <div class="filter-row" aria-label="Filter destinations">
+        <button class="filter-btn active" data-filter="all">All Places</button>
+        <button class="filter-btn" data-filter="parks">National Parks</button>
+        <button class="filter-btn" data-filter="cities">Cities</button>
+        <button class="filter-btn" data-filter="landmarks">Landmarks</button>
+        <button class="filter-btn" data-filter="beaches">Beaches &amp; Lakes</button>
+      </div>
+
+      <div class="destination-grid" id="destinationGrid">
+        <article class="destination-card" data-category="parks">
+          <img src="anotherGorilla.jpg" alt="Mountain gorilla in a green forest" loading="lazy">
+          <div class="card-content">
+            <span class="category">National Park</span>
+            <h3>Bwindi Impenetrable Forest</h3>
+            <p>Experience the unforgettable mountain gorilla trekking adventure in one of Uganda's most treasured forests.</p>
+            <a class="card-link" href="Packages.html">Explore tour packages &rarr;</a>
+          </div>
+        </article>
+
+        <article class="destination-card" data-category="parks">
+          <img src="elephantFamily.jpg" alt="Giraffes in an African wildlife reserve" loading="lazy">
+          <div class="card-content">
+            <span class="category">National Park</span>
+            <h3>Queen Elizabeth National Park</h3>
+            <p>Enjoy wildlife drives, beautiful landscapes and boat trips along the famous Kazinga Channel.</p>
+            <a class="card-link" href="Packages.html">Explore tour packages &rarr;</a>
+          </div>
+        </article>
+
+        <article class="destination-card" data-category="parks">
+          <img src="falls.jpg" alt="Powerful waterfall flowing through a green landscape" loading="lazy">
+          <div class="card-content">
+            <span class="category">National Park</span>
+            <h3>Murchison Falls National Park</h3>
+            <p>See the mighty Nile squeeze through a narrow gorge and explore the park's rich wildlife.</p>
+            <a class="card-link" href="Packages.html">Explore tour packages &rarr;</a>
+          </div>
+        </article>
+
+        <article class="destination-card" data-category="cities">
+          <img src="kampala.jpg" alt="Modern city skyline" loading="lazy">
+          <div class="card-content">
+            <span class="category">City</span>
+            <h3>Kampala City</h3>
+            <p>Discover Uganda's lively capital through its markets, food, culture, history and city viewpoints.</p>
+            <a class="card-link" href="Packages.html">Explore city tours &rarr;</a>
+          </div>
+        </article>
+
+        <article class="destination-card" data-category="beaches">
+          <img src="Victoria.jpg" alt="Blue water and a peaceful sandy beach" loading="lazy">
+          <div class="card-content">
+            <span class="category">Beach &amp; Lake</span>
+            <h3>Entebbe &amp; Lake Victoria</h3>
+            <p>Unwind by the lakeshore, enjoy fresh breezes and discover relaxing activities around Entebbe.</p>
+            <a class="card-link" href="Packages.html">Explore lake tours &rarr;</a>
+          </div>
+        </article>
+
+        <article class="destination-card" data-category="landmarks">
+          <img src="kasubiTombs.png" alt="Traditional African cultural architecture" loading="lazy">
+          <div class="card-content">
+            <span class="category">Cultural Landmark</span>
+            <h3>Kasubi Tombs</h3>
+            <p>Learn about Buganda's royal heritage and the cultural traditions preserved at this historic site.</p>
+            <a class="card-link" href="Packages.html">Explore cultural tours &rarr;</a>
+          </div>
+        </article>
+
+        <article class="destination-card" data-category="beaches">
+          <img src="beach1.jpg" alt="Sunny tropical beach beside clear blue water" loading="lazy">
+          <div class="card-content">
+            <span class="category">Beach</span>
+            <h3>Lake Victoria Island Escapes</h3>
+            <p>Take a boat trip to explore peaceful islands, scenic water views and laid-back lakeside experiences.</p>
+            <a class="card-link" href="Packages.html">Explore island tours &rarr;</a>
+          </div>
+        </article>
+
+        <article class="destination-card" data-category="landmarks">
+          <img src="mtRwenzori.png" alt="Scenic natural landscape and mountains" loading="lazy">
+          <div class="card-content">
+            <span class="category">Natural Landmark</span>
+            <h3>Rwenzori Mountains</h3>
+            <p>Admire dramatic mountain scenery and discover one of East Africa's most remarkable hiking regions.</p>
+            <a class="card-link" href="Packages.html">Explore adventure tours &rarr;</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="callout">
+      <h2>Discover. Explore. Travel with Us!</h2>
+      <p>Your next memorable journey begins with Safari &amp; City Tours.</p>
+      <a class="btn" href="contact.html">Book Your Tour</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Safari &amp; City Tours. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile navigation menu
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+    });
+
+    // Filter destination cards by category
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const destinationCards = document.querySelectorAll(".destination-card");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const selectedCategory = button.dataset.filter;
+
+        filterButtons.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+
+        destinationCards.forEach(card => {
+          const matches = selectedCategory === "all" ||
+                          card.dataset.category === selectedCategory;
+          card.hidden = !matches;
+        });
+      });
+    });
+
+    // Display the current year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const slides=[
+      {
+        Image:"zebras.jpg",
+        caption:"Uganda wildlifesafari"
+      }
+
+      {
+      image:"sunshinepark.jpg",
+      caption:"Beautiful safari parks",
+      }
+    ];
+    let currentSlide=0;
+    function showslide () {
+      document.getElementById("slideImage").src=
+      slides[currentSlide].image;
+      document.getElementById("slidecaption").textcontext=
+      slides[currentslide].caption;
+    }
+    // change image automatically every 4seconds
+    setInterval(()  {
+      currentslide=(currentslide+1)slide.length;
+      showslide();
+    },4000);
+      
+  </script>
+</body>
+</html>
